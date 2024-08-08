@@ -1,23 +1,23 @@
 import 'reflect-metadata';
-import { createConnection } from 'typeorm';
 import { Product } from './entity/product';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import { AppDataSource } from './ormconfig';
 
-createConnection().then(async connection => {
+AppDataSource.initialize().then(async (connection: any) => {
   console.log('Connected to the database');
 
   const app = express();
   app.use(bodyParser.json({ limit: '10mb' }));
 
   const corsOptions = {
-    origin: 'http://localhost:4200',
+    origin: 'https://66b4de282ca2642058bcff84--admin-panel-prj.netlify.app',
     optionsSuccessStatus: 200
   };
-  
+
   app.use(cors(corsOptions));
-  
+
 
   const productRepository = connection.getRepository(Product);
 
