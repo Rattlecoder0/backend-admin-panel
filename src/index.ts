@@ -12,7 +12,7 @@ AppDataSource.initialize().then(async (connection: any) => {
   app.use(bodyParser.json({ limit: '10mb' }));
 
   const corsOptions = {
-    origin: 'https://66b4de282ca2642058bcff84--admin-panel-prj.netlify.app',
+    origin: 'https://admin-panel-prj.netlify.app',
     optionsSuccessStatus: 200
   };
 
