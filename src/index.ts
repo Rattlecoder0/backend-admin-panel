@@ -22,20 +22,20 @@ AppDataSource.initialize().then(async (connection: any) => {
   const productRepository = connection.getRepository(Product);
 
   // Get all products
-  app.get('/products', async (req, res) => {
+  app.get('/products', async (req: express.Request, res: express.Response) => {
     const products = await productRepository.find();
     res.json(products);
   });
 
   // Add a new product
-  app.post('/products', async (req, res) => {
+  app.post('/products', async (req: express.Request, res: express.Response) => {
     const product = productRepository.create(req.body);
     const result = await productRepository.save(product);
     res.send(result);
   });
 
   // Update a product
-  app.put('/products/:id', async (req, res) => {
+  app.put('/products/:id', async (req: express.Request, res: express.Response) => {
     const productId = parseInt(req.params.id, 10);
     const product = await productRepository.findOne({ where: { id: productId } });
     if (!product) {
@@ -47,7 +47,7 @@ AppDataSource.initialize().then(async (connection: any) => {
   });
 
   // Delete a product
-  app.delete('/products/:id', async (req, res) => {
+  app.delete('/products/:id', async (req: express.Request, res: express.Response) => {
     const productId = parseInt(req.params.id, 10);
     const result = await productRepository.delete(productId);
     res.send(result);
